@@ -1,0 +1,778 @@
+<!-- /* ══════════════════════════════════════════════════════════════════
+Responsible AI Principle Activity for Students
+Introduction to AI 2026
+Designed by Amanda Wilkerson, 2026
+For questions or feedback, contact Amanda at <amanda@rhinicorn.com>
+
+Copyright (C) <2026> <Amanda Wilkerson>
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or 
+  any later version.
+    
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program. If not, see https://www.gnu.org/licenses .
+════════════════════════════════════════════════════════════════════ */ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 6 Explore: Principle or Violation? Short Case Gallery</title>
+  <style>
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6fa;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #1a3a5c 0%, #2e6da4 100%);
+      color: #fff;
+      padding: 2rem 2rem 1.5rem;
+      text-align: center;
+    }
+    header .module-tag {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 0.4rem;
+    }
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.88;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    /* ── Instructions Banner ── */
+    .instructions {
+      background: #e8f0fb;
+      border-left: 5px solid #2e6da4;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem auto;
+      max-width: 900px;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .instructions strong { color: #1a3a5c; }
+
+    /* ── Principle Legend ── */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+      padding: 0 1rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #fff;
+    }
+    .badge-fairness       { background: #c0392b; }
+    .badge-transparency   { background: #8e44ad; }
+    .badge-accountability { background: #1a6e3c; }
+    .badge-privacy        { background: #1f5f8b; }
+    .badge-inclusiveness  { background: #b7600a; }
+
+    /* ── Scenario Cards ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 1.25rem;
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+      padding: 1.25rem 1.25rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      border-top: 4px solid #2e6da4;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.13); }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .card-number {
+      background: #2e6da4;
+      color: #fff;
+      border-radius: 50%;
+      width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .scenario-title {
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #555;
+    }
+    .scenario-text {
+      font-size: 0.93rem;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* ── Selects ── */
+    .selects-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    select {
+      flex: 1;
+      min-width: 130px;
+      padding: 0.45rem 0.6rem;
+      border: 1.5px solid #cdd5df;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      background: #f9fafc;
+      color: #222;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.7rem center;
+      padding-right: 2rem;
+      transition: border-color 0.2s;
+    }
+    select:focus { outline: none; border-color: #2e6da4; }
+
+    /* ── Feedback Pills ── */
+    .feedback {
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      display: none;
+    }
+    .feedback.correct   { background: #d4edda; color: #155724; display: block; }
+    .feedback.partial   { background: #fff3cd; color: #856404; display: block; }
+    .feedback.incorrect { background: #f8d7da; color: #721c24; display: block; }
+
+    /* ── Action Buttons ── */
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+    }
+    .btn {
+      padding: 0.65rem 1.6rem;
+      border: none;
+      border-radius: 7px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary   { background: #2e6da4; color: #fff; }
+    .btn-primary:hover { background: #1a3a5c; }
+    .btn-secondary { background: #e0e7f0; color: #1a3a5c; }
+    .btn-secondary:hover { background: #c7d5e8; }
+
+    /* ── Score Banner ── */
+    #score-banner {
+      display: none;
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+      padding: 0 1rem;
+    }
+    .score-box {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+    .score-box .score-num {
+      font-size: 2rem;
+      font-weight: 800;
+      display: block;
+      margin: 0.2rem 0;
+    }
+
+    /* ── Answer Key ── */
+    .answer-key-section {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+    }
+    .answer-key-toggle {
+      background: #1a3a5c;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
+    }
+    .answer-key-toggle:hover { background: #2e6da4; }
+    .toggle-icon { font-size: 1.2rem; transition: transform 0.3s; }
+    .answer-key-body {
+      display: none;
+      background: #fff;
+      border: 1.5px solid #cdd5df;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+    }
+    .answer-key-body.open { display: block; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    thead { background: #e8f0fb; }
+    th, td {
+      padding: 0.7rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e5eaf2;
+    }
+    th { font-weight: 700; color: #1a3a5c; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f7f9fd; }
+    .key-badge {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .uphold    { background: #1a6e3c; }
+    .violation { background: #c0392b; }
+
+    footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #999;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="module-tag">Module 6 · Explore Activity</div>
+  <h1>Principle or Violation? Short Case Gallery</h1>
+  <p>Read each scenario, select the responsible AI principle most at issue, and decide whether the scenario upholds or violates that principle.</p>
+  <p>Check your answers when you're done!</p>
+</header>
+
+<div class="instructions">
+  <strong>How to Use This Activity:</strong> For each of the 10 scenarios below, use the two dropdowns to (1) identify the <em>responsible AI principle</em> most at issue and (2) indicate whether the scenario <em>upholds</em> or <em>violates</em> that principle. When finished, click <strong>Check My Answers</strong> to get instant feedback. A full answer key is available at the bottom for reference.
+</div>
+
+<div class="legend">
+  <span class="badge badge-fairness">Fairness</span>
+  <span class="badge badge-transparency">Transparency</span>
+  <span class="badge badge-accountability">Accountability</span>
+  <span class="badge badge-privacy">Privacy</span>
+  <span class="badge badge-inclusiveness">Inclusiveness</span>
+</div>
+
+<div class="cards-grid" id="cards-grid">
+
+  <!-- Card 1 -->
+  <div class="card" data-principle="fairness" data-judgment="violation">
+    <div class="card-header">
+      <div class="card-number">1</div>
+      <span class="scenario-title">Scenario</span>
+    </div>
+    <p class="scenario-text">A tech company uses a hiring algorithm trained on its own historical resume data. The algorithm consistently ranks female applicants lower for software engineering roles, replicating patterns from decades of male-dominated hiring decisions.</p>
+    <div class="selects-row">
+      <select class="principle-select">
+        <option value="">— Select Principle —</option>
+        <option value="fairness">Fairness</option>
+        <option value="transparency">Transparency</option>
+        <option value="accountability">Accountability</option>
+        <option value="privacy">Privacy</option>
+        <option value="inclusiveness">Inclusiveness</option>
+      </select>
+      <select class="judgment-select">
+        <option value="">— Upholds or Violates? —</option>
+        <option value="uphold">Upholds</option>
+        <option value="violation">Violates</option>
+      </select>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="card" data-principle="transparency" data-judgment="uphold">
+    <div class="card-header">
+      <div class="card-number">2</div>
+      <span class="scenario-title">Scenario</span>
+    </div>
+    <p class="scenario-text">A hospital deploys an AI diagnostic assistant. After every recommendation, the system generates a plain-language summary explaining which symptoms and patient history factors most influenced its suggestion, which the care team shares with patients before any decision is made.</p>
+    <div class="selects-row">
+      <select class="principle-select">
+        <option value="">— Select Principle —</option>
+        <option value="fairness">Fairness</option>
+        <option value="transparency">Transparency</option>
+        <option value="accountability">Accountability</option>
+        <option value="privacy">Privacy</option>
+        <option value="inclusiveness">Inclusiveness</option>
+      </select>
+      <select class="judgment-select">
+        <option value="">— Upholds or Violates? —</option>
+        <option value="uphold">Upholds</option>
+        <option value="violation">Violates</option>
+      </select>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="card" data-principle="accountability" data-judgment="violation">
+    <div class="card-header">
+      <div class="card-number">3</div>
+      <span class="scenario-title">Scenario</span>
+    </div>
+    <p class="scenario-text">A social media platform uses an AI content moderation system that removes posts and suspends accounts. Users receive no explanation for why their content was flagged and have no mechanism to appeal the AI's decision to a human reviewer.</p>
+    <div class="selects-row">
+      <select class="principle-select">
+        <option value="">— Select Principle —</option>
+        <option value="fairness">Fairness</option>
+        <option value="transparency">Transparency</option>
+        <option value="accountability">Accountability</option>
+        <option value="privacy">Privacy</option>
+        <option value="inclusiveness">Inclusiveness</option>
+      </select>
+      <select class="judgment-select">
+        <option value="">— Upholds or Violates? —</option>
+        <option value="uphold">Upholds</option>
+        <option value="violation">Violates</option>
+      </select>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="card" data-principle="privacy" data-judgment="violation">
+    <div class="card-header">
+      <div class="card-number">4</div>
+      <span class="scenario-title">Scenario</span>
+    </div>
+    <p class="scenario-text">A popular smart home speaker continuously records ambient audio even when its wake word has not been spoken and shares these recordings with third-party advertisers. Users are not informed of this practice in the device's setup process.</p>
+    <div class="selects-row">
+      <select class="principle-select">
+        <option value="">— Select Principle —</option>
+        <option value="fairness">Fairness</option>
+        <option value="transparency">Transparency</option>
+        <option value="accountability">Accountability</option>
+        <option value="privacy">Privacy</option>
+        <option value="inclusiveness">Inclusiveness</option>
+      </select>
+      <select class="judgment-select">
+        <option value="">— Upholds or Violates? —</option>
+        <option value="uphold">Upholds</option>
+        <option value="violation">Violates</option>
+      </select>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <!-- Card 5 -->
+  <div class="card" data-principle="inclusiveness" data-judgment="violation">
+    <div class="card-header">
+      <div class="card-number">5</div>
+      <span class="scenario-title">Scenario</span>
+    </div>
+    <p class="scenario-text">A city deploys an AI-powered public safety system to optimize emergency response times. The model was trained exclusively on incident data from high-income neighborhoods, resulting in significantly slower predicted response times in lower-income areas.</p>
+    <div class="selects-row">
+      <select class="principle-select">
+        <option value="">— Select Principle —</option>
+        <option value="fairness">Fairness</option>
+        <option value="transparency">Transparency</option>
+        <option value="accountability">Accountability</option>
+        <option value="privacy">Privacy</option>
+        <option value="inclusiveness">Inclusiveness</option>
+      </select>
+      <select class="judgment-select">
+        <option value="">— Upholds or Violates? —</option>
+        <option value="uphold">Upholds</option>
+        <option value="violation">Violates</option>
+      </select>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <!-- Card 6 -->
+  <div class="card" data-principle="accountability" data-judgment="uphold">
+    <div class="card-header">
+      <div class="card-number">6</div>
+      <span class="scenario-title">Scenario</span>
+    </div>
+    <p class="scenario-text">A regional bank commissions an independent third-party audit of its AI loan approval model. The auditors' full report — including identified errors and corrective actions taken — is published on the bank's website and shared with regulators.</p>
+    <div class="selects-row">
+      <select class="principle-select">
+        <option value="">— Select Principle —</option>
+        <option value="fairness">Fairness</option>
+        <option value="transparency">Transparency</option>
+        <option value="accountability">Accountability</option>
+        <option value="privacy">Privacy</option>
+        <option value="inclusiveness">Inclusiveness</option>
+      </select>
+      <select class="judgment-select">
+        <option value="">— Upholds or Violates? —</option>
+        <option value="uphold">Upholds</option>
+        <option value="violation">Violates</option>
+      </select>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <!-- Card 7 -->
+  <div class="card" data-principle="transparency" data-judgment="violation">
+    <div class="card-header">
+      <div class="card-number">7</div>
+      <span class="scenario-title">Scenario</span>
+    </div>
+    <p class="scenario-text">A retail company uses a facial recognition system in its stores to identify suspected shoplifters. Customers are never informed through signage or any other means that their faces are being scanned and compared against a database when they enter the store.</p>
+    <div class="selects-row">
+      <select class="principle-select">
+        <option value="">— Select Principle —</option>
+        <option value="fairness">Fairness</option>
+        <option value="transparency">Transparency</option>
+        <option value="accountability">Accountability</option>
+        <option value="privacy">Privacy</option>
+        <option value="inclusiveness">Inclusiveness</option>
+      </select>
+      <select class="judgment-select">
+        <option value="">— Upholds or Violates? —</option>
+        <option value="uphold">Upholds</option>
+        <option value="violation">Violates</option>
+      </select>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <!-- Card 8 -->
+  <div class="card" data-principle="fairness" data-judgment="uphold">
+    <div class="card-header">
+      <div class="card-number">8</div>
+      <span class="scenario-title">Scenario</span>
+    </div>
+    <p class="scenario-text">An insurance company's AI risk-scoring model is tested quarterly against outcomes data broken down by race, gender, and age. When disparate impact is detected in any group, the model is taken offline for retraining before it is used again in pricing decisions.</p>
+    <div class="selects-row">
+      <select class="principle-select">
+        <option value="">— Select Principle —</option>
+        <option value="fairness">Fairness</option>
+        <option value="transparency">Transparency</option>
+        <option value="accountability">Accountability</option>
+        <option value="privacy">Privacy</option>
+        <option value="inclusiveness">Inclusiveness</option>
+      </select>
+      <select class="judgment-select">
+        <option value="">— Upholds or Violates? —</option>
+        <option value="uphold">Upholds</option>
+        <option value="violation">Violates</option>
+      </select>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <!-- Card 9 -->
+  <div class="card" data-principle="inclusiveness" data-judgment="uphold">
+    <div class="card-header">
+      <div class="card-number">9</div>
+      <span class="scenario-title">Scenario</span>
+    </div>
+    <p class="scenario-text">A state government redesigns its benefits enrollment portal with an AI assistant that supports 14 languages, includes full screen-reader compatibility, and was co-designed with focus groups representing elderly, rural, and non-English-speaking residents.</p>
+    <div class="selects-row">
+      <select class="principle-select">
+        <option value="">— Select Principle —</option>
+        <option value="fairness">Fairness</option>
+        <option value="transparency">Transparency</option>
+        <option value="accountability">Accountability</option>
+        <option value="privacy">Privacy</option>
+        <option value="inclusiveness">Inclusiveness</option>
+      </select>
+      <select class="judgment-select">
+        <option value="">— Upholds or Violates? —</option>
+        <option value="uphold">Upholds</option>
+        <option value="violation">Violates</option>
+      </select>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <!-- Card 10 -->
+  <div class="card" data-principle="privacy" data-judgment="violation">
+    <div class="card-header">
+      <div class="card-number">10</div>
+      <span class="scenario-title">Scenario</span>
+    </div>
+    <p class="scenario-text">A mental health app uses AI to analyze users' therapy journal entries and session notes. Without users' knowledge or consent, this data — including diagnoses, medications, and personal disclosures — is sold to pharmaceutical research firms.</p>
+    <div class="selects-row">
+      <select class="principle-select">
+        <option value="">— Select Principle —</option>
+        <option value="fairness">Fairness</option>
+        <option value="transparency">Transparency</option>
+        <option value="accountability">Accountability</option>
+        <option value="privacy">Privacy</option>
+        <option value="inclusiveness">Inclusiveness</option>
+      </select>
+      <select class="judgment-select">
+        <option value="">— Upholds or Violates? —</option>
+        <option value="uphold">Upholds</option>
+        <option value="violation">Violates</option>
+      </select>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+</div><!-- /cards-grid -->
+
+<div class="actions">
+  <button class="btn btn-primary" onclick="checkAnswers()">Check My Answers</button>
+  <button class="btn btn-secondary" onclick="resetAll()">Reset</button>
+</div>
+
+<div id="score-banner">
+  <div class="score-box">
+    <span>Your Score</span>
+    <span class="score-num" id="score-display"></span>
+    <span id="score-message"></span>
+  </div>
+</div>
+
+<!-- Answer Key -->
+<div class="answer-key-section">
+  <button class="answer-key-toggle" onclick="toggleKey(this)">
+    Reference Answer Key
+    <span class="toggle-icon">▼</span>
+  </button>
+  <div class="answer-key-body">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Scenario Summary</th>
+          <th>Principle</th>
+          <th>Judgment</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Hiring algorithm ranks women lower</td>
+          <td><span class="key-badge badge-fairness">Fairness</span></td>
+          <td><span class="key-badge violation">Violation</span></td>
+          <td>The model perpetuates historical gender bias, producing unequal outcomes for a protected group.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Hospital AI explains diagnostic reasoning</td>
+          <td><span class="key-badge badge-transparency">Transparency</span></td>
+          <td><span class="key-badge uphold">Upholds</span></td>
+          <td>Patients and clinicians receive clear, accessible explanations of how the AI reached its recommendation.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Social media AI bans with no appeal</td>
+          <td><span class="key-badge badge-accountability">Accountability</span></td>
+          <td><span class="key-badge violation">Violation</span></td>
+          <td>No human oversight or appeal process means there is no mechanism to correct AI errors or answer to affected users.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Smart speaker records and shares audio secretly</td>
+          <td><span class="key-badge badge-privacy">Privacy</span></td>
+          <td><span class="key-badge violation">Violation</span></td>
+          <td>Data is collected beyond stated purpose and shared without user knowledge or consent.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Public safety AI trained on affluent-area data only</td>
+          <td><span class="key-badge badge-inclusiveness">Inclusiveness</span></td>
+          <td><span class="key-badge violation">Violation</span></td>
+          <td>Excluding lower-income communities from training data means the system fails to serve all residents equitably.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Bank publishes independent AI audit results</td>
+          <td><span class="key-badge badge-accountability">Accountability</span></td>
+          <td><span class="key-badge uphold">Upholds</span></td>
+          <td>Independent auditing and public disclosure demonstrate ownership of AI outcomes and commitment to correction.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Retail facial recognition with no customer notice</td>
+          <td><span class="key-badge badge-transparency">Transparency</span></td>
+          <td><span class="key-badge violation">Violation</span></td>
+          <td>Customers have no awareness they are being scanned, removing their ability to make an informed choice.</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Insurance model tested quarterly for disparate impact</td>
+          <td><span class="key-badge badge-fairness">Fairness</span></td>
+          <td><span class="key-badge uphold">Upholds</span></td>
+          <td>Regular disaggregated testing and corrective action shows active commitment to equitable outcomes.</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Government portal co-designed for diverse users</td>
+          <td><span class="key-badge badge-inclusiveness">Inclusiveness</span></td>
+          <td><span class="key-badge uphold">Upholds</span></td>
+          <td>Multilingual access, accessibility features, and participatory design ensure the system works for all communities.</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Mental health app sells therapy data to pharma</td>
+          <td><span class="key-badge badge-privacy">Privacy</span></td>
+          <td><span class="key-badge violation">Violation</span></td>
+          <td>Sensitive health data is shared for an entirely different purpose without the users' knowledge or consent.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer>AAIT110 · Module 6 Explore Activity</footer>
+
+<script>
+  const answers = {
+    principle: {
+      correct: '✅ Correct principle!',
+      wrong: '❌ Not quite — check the answer key for the intended principle.'
+    },
+    judgment: {
+      correct: '✅ Correct judgment!',
+      wrong: '❌ Review the scenario again — check the answer key for the reasoning.'
+    }
+  };
+
+  function checkAnswers() {
+    const cards = document.querySelectorAll('.card');
+    let score = 0;
+    let attempted = 0;
+
+    cards.forEach(card => {
+      const correctPrinciple = card.dataset.principle;
+      const correctJudgment  = card.dataset.judgment;
+      const principleSelect  = card.querySelector('.principle-select');
+      const judgmentSelect   = card.querySelector('.judgment-select');
+      const feedback         = card.querySelector('.feedback');
+
+      const selectedPrinciple = principleSelect.value;
+      const selectedJudgment  = judgmentSelect.value;
+
+      if (!selectedPrinciple && !selectedJudgment) {
+        feedback.className = 'feedback';
+        feedback.textContent = '';
+        return;
+      }
+
+      attempted++;
+      const principleCorrect = selectedPrinciple === correctPrinciple;
+      const judgmentCorrect  = selectedJudgment  === correctJudgment;
+
+      if (principleCorrect && judgmentCorrect) {
+        score++;
+        feedback.className = 'feedback correct';
+        feedback.textContent = '✅ Both correct! Great recognition.';
+      } else if (principleCorrect || judgmentCorrect) {
+        feedback.className = 'feedback partial';
+        if (principleCorrect) {
+          feedback.textContent = '🟡 Principle is right, but reconsider the judgment.';
+        } else {
+          feedback.textContent = '🟡 Judgment is right, but reconsider which principle is most at issue.';
+        }
+      } else {
+        feedback.className = 'feedback incorrect';
+        feedback.textContent = '❌ Both selections need a second look. See the answer key below.';
+      }
+    });
+
+    const banner = document.getElementById('score-banner');
+    const display = document.getElementById('score-display');
+    const message = document.getElementById('score-message');
+    const total = cards.length;
+
+    if (attempted > 0) {
+      banner.style.display = 'block';
+      display.textContent = score + ' / ' + total;
+      if (score === total) {
+        message.textContent = '🎉 Perfect score! You\'re ready for the quiz.';
+      } else if (score >= total * 0.7) {
+        message.textContent = '👍 Good work! Review the missed scenarios and the answer key.';
+      } else {
+        message.textContent = '📖 Keep practicing — revisit the principle descriptions and try again.';
+      }
+    }
+
+    window.scrollTo({ top: banner.offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function resetAll() {
+    document.querySelectorAll('select').forEach(s => s.value = '');
+    document.querySelectorAll('.feedback').forEach(f => {
+      f.className = 'feedback';
+      f.textContent = '';
+    });
+    document.getElementById('score-banner').style.display = 'none';
+  }
+
+  function toggleKey(btn) {
+    const body = btn.nextElementSibling;
+    const icon = btn.querySelector('.toggle-icon');
+    body.classList.toggle('open');
+    icon.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+</script>
+</body>
+</html>
